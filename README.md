@@ -12,6 +12,12 @@
   <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20macOS-0078d7.svg?style=flat-square" alt="Platform">
 </p>
 
+<p align="center">
+  <a href="https://github.com/linxingli/tts-client/releases/latest">
+    <img src="https://img.shields.io/github/v/release/linxingli/tts-client?color=165dff&label=%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%89%88&style=flat-square" alt="Download">
+  </a>
+</p>
+
 ---
 
 ## 🌟 项目简介
@@ -48,6 +54,18 @@
 ---
 
 ## 🚀 安装与使用
+
+### 📥 客户端下载
+
+直接从 [GitHub Releases](https://github.com/linxingli/tts-client/releases/latest) 下载对应系统的安装包：
+
+| 系统 | 安装包 |
+|------|--------|
+| macOS (Apple Silicon) | `tts-client-x.y.z-arm64.dmg` |
+| macOS (Intel) | `tts-client-x.y.z-x64.dmg` |
+| Windows | `tts-client-x.y.z-setup.exe` |
+
+> 若 macOS 提示"已损坏"，请查看下方 [FAQ](#macos-打开应用提示已损坏无法打开)。
 
 ### 运行环境
 
