@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>声动 - 免Key高质量AI文字转语音桌面应用</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #0a0a1a;
+            color: #e0e0e0;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0a0a1a 100%);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(100, 100, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(255, 100, 200, 0.08) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 20px;
+            background: rgba(100, 130, 255, 0.15);
+            border: 1px solid rgba(100, 130, 255, 0.3);
+            border-radius: 20px;
+            font-size: 14px;
+            color: #8faaff;
+            margin-bottom: 30px;
+        }
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        .hero-subtitle {
+            font-size: 20px;
+            color: #a0a0c0;
+            margin-bottom: 15px;
+        }
+        .hero-tagline {
+            font-size: 16px;
+            color: #707090;
+        }
+        .tech-stack {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .tech-tag {
+            padding: 6px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 14px;
+            color: #b0b0d0;
+        }
+        /* Sections */
+        .section {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, #8faaff, #c0a0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        /* Problem Section */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+        .problem-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        .problem-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(100, 130, 255, 0.3);
+            transform: translateY(-4px);
+        }
+        .problem-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        .problem-card h3 {
+            font-size: 18px;
+            color: #e0e0ff;
+            margin-bottom: 10px;
+        }
+        .problem-card p {
+            font-size: 15px;
+            color: #9090b0;
+            line-height: 1.7;
+        }
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .feature-card {
+            background: linear-gradient(135deg, rgba(100, 130, 255, 0.05), rgba(200, 100, 255, 0.03));
+            border: 1px solid rgba(100, 130, 255, 0.15);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            border-color: rgba(100, 130, 255, 0.4);
+            box-shadow: 0 8px 32px rgba(100, 130, 255, 0.1);
+        }
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        .feature-card h3 {
+            font-size: 18px;
+            color: #e0e0ff;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            font-size: 14px;
+            color: #9090b0;
+            line-height: 1.7;
+        }
+        .feature-list {
+            list-style: none;
+            margin-top: 12px;
+        }
+        .feature-list li {
+            font-size: 14px;
+            color: #8080a0;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        .feature-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #6a7fff;
+        }
+        /* Target Users */
+        .users-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .user-card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 30px 20px;
+            transition: all 0.3s ease;
+        }
+        .user-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-4px);
+        }
+        .user-emoji {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .user-card h3 {
+            font-size: 18px;
+            color: #e0e0ff;
+            margin-bottom: 8px;
+        }
+        .user-card p {
+            font-size: 14px;
+            color: #9090b0;
+        }
+        /* Value Section */
+        .value-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .value-item {
+            display: flex;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            align-items: flex-start;
+        }
+        .value-number {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .value-item h3 {
+            font-size: 18px;
+            color: #e0e0ff;
+            margin-bottom: 8px;
+        }
+        .value-item p {
+            font-size: 15px;
+            color: #9090b0;
+            line-height: 1.7;
+        }
+        /* UI Preview */
+        .ui-preview {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 20px;
+        }
+        .ui-window {
+            background: #1a1a2e;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ui-titlebar {
+            background: #16162a;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ui-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .ui-body {
+            padding: 24px;
+        }
+        .ui-textarea {
+            background: #0f0f1e;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 16px;
+            color: #a0a0c0;
+            font-size: 14px;
+            line-height: 1.8;
+            min-height: 100px;
+            margin-bottom: 16px;
+        }
+        .ui-controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .ui-btn {
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .ui-btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .ui-btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: #b0b0d0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ui-select {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #b0b0d0;
+            font-size: 14px;
+        }
+        .ui-player {
+            margin-top: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .ui-progress {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .ui-progress-bar {
+            width: 35%;
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #606080;
+            font-size: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .footer a {
+            color: #8faaff;
+            text-decoration: none;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .section-title { font-size: 28px; }
+            .section { padding: 60px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">TRAE AI 创造力大赛 · 学习工作赛道</div>
+            <h1>声动</h1>
+            <p class="hero-subtitle">免 Key 高质量 AI 文字转语音桌面应用</p>
+            <p class="hero-tagline">音质自然 · 开箱即用 · AI 智能润色 · MP3 导出</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Electron 30</span>
+                <span class="tech-tag">Vue 3</span>
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Edge TTS</span>
+                <span class="tech-tag">OpenAI 兼容协议</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 创意介绍 -->
+    <section class="section">
+        <h2 class="section-title">创意介绍</h2>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon">🎯</div>
+                <h3>想解决什么问题</h3>
+                <p>长文章、学习资料看久了眼睛累，通勤、运动、做家务时无法看屏幕。市面上的 TTS 工具要么需要付费 API Key，要么音质生硬机械，门槛高、体验差。</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">💡</div>
+                <h3>为什么会想到做这个</h3>
+                <p>作为内容创作者和学习者，经常需要"听"大量文章和资料。发现 Edge 浏览器"大声朗读"功能音质极佳且免费，但只能在浏览器中使用，无法导出和管理，于是决定做一个独立的桌面客户端。</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">🖥️</div>
+                <h3>大概是什么产品</h3>
+                <p>一款基于 Electron + Vue 3 的桌面文字转语音应用，调用 Edge TTS 服务进行高质量语音合成，内置 AI 润色与总结能力，支持多音色选择、实时参数调节、MP3 导出和历史记录管理。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 目标用户及痛点 -->
+    <section class="section">
+        <h2 class="section-title">目标用户及痛点</h2>
+        <div class="users-grid">
+            <div class="user-card">
+                <div class="user-emoji">📚</div>
+                <h3>学习者</h3>
+                <p>通勤、运动时听学习资料和笔记，碎片时间也能高效学习</p>
+            </div>
+            <div class="user-card">
+                <div class="user-emoji">✍️</div>
+                <h3>内容创作者</h3>
+                <p>快速将文章转为语音试听，生成有声内容，提升创作效率</p>
+            </div>
+            <div class="user-card">
+                <div class="user-emoji">👁️</div>
+                <h3>视障人群</h3>
+                <p>将文字内容朗读出来，作为屏幕阅读器的有力补充</p>
+            </div>
+            <div class="user-card">
+                <div class="user-emoji">📖</div>
+                <h3>长文阅读者</h3>
+                <p>听文章代替看文章，保护视力，多任务并行处理</p>
+            </div>
+        </div>
+        <div class="ui-preview">
+            <div style="margin-bottom: 20px; text-align: center;">
+                <p style="color: #9090b0; font-size: 15px;">
+                    <strong style="color: #e0e0ff;">当前痛点：</strong>
+                    传统 TTS 工具需要申请 API Key（如阿里云、百度云），配置复杂且按量收费；
+                    免费方案音质差、不支持长文本；
+                    在线工具无法导出 MP3，无法离线使用；
+                    长文章朗读时缺乏智能精简能力，浪费时间。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心功能 -->
+    <section class="section">
+        <h2 class="section-title">核心功能</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(100, 200, 255, 0.15);">🔊</div>
+                <h3>高质量语音合成</h3>
+                <p>复用 Edge 浏览器"大声朗读"背后的 TTS 服务，音质接近真人</p>
+                <ul class="feature-list">
+                    <li>免 Key 调用，开箱即用</li>
+                    <li>长文本自动分段，预合成下一段</li>
+                    <li>全量音色列表，中文音色置顶</li>
+                    <li>支持男声/女声/多语种</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(255, 180, 100, 0.15);">🎛️</div>
+                <h3>实时参数调节</h3>
+                <p>语速、音调、音量自由控制，满足个性化需求</p>
+                <ul class="feature-list">
+                    <li>语速/音调：合成参数级调节</li>
+                    <li>音量：播放器实时控制，无需重合成</li>
+                    <li>拖动即变，操作直观</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(180, 100, 255, 0.15);">🧠</div>
+                <h3>AI 润色与总结</h3>
+                <p>对接任意 OpenAI 兼容协议大模型，朗读前智能精简长文</p>
+                <ul class="feature-list">
+                    <li>支持 DeepSeek/OpenAI/智谱/通义等</li>
+                    <li>一键语病修正、要点提炼</li>
+                    <li>冗余删减，生成通顺总结</li>
+                    <li>API Key 本地保存，安全可靠</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background: rgba(100, 255, 180, 0.15);">💾</div>
+                <h3>导出与历史记录</h3>
+                <p>多段合成拼接导出 MP3，历史记录本地持久化</p>
+                <ul class="feature-list">
+                    <li>导出单个 MP3 文件，方便离线收听</li>
+                    <li>朗读记录本地保存</li>
+                    <li>一键回填文本与参数</li>
+                    <li>支持 macOS 和 Windows 双平台</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- UI 预览 -->
+    <section class="section">
+        <h2 class="section-title">产品界面预览</h2>
+        <div class="ui-preview">
+            <div class="ui-window">
+                <div class="ui-titlebar">
+                    <div class="ui-dot" style="background: #ff5f57;"></div>
+                    <div class="ui-dot" style="background: #febc2e;"></div>
+                    <div class="ui-dot" style="background: #28c840;"></div>
+                </div>
+                <div class="ui-body">
+                    <div class="ui-textarea">
+                        在信息爆炸的时代，我们每天都会接触大量的文字内容——学习资料、技术博客、新闻资讯……长时间阅读不仅容易疲劳，还难以在通勤、运动等场景下进行。<br><br>
+                        声动是一款基于 Edge TTS 的桌面文字转语音应用，让你可以随时随地"听"文章……
+                    </div>
+                    <div class="ui-controls">
+                        <select class="ui-select">
+                            <option>晓晓（女声·中文）</option>
+                        </select>
+                        <button class="ui-btn ui-btn-primary">▶ 播放</button>
+                        <button class="ui-btn ui-btn-secondary">AI 总结</button>
+                        <button class="ui-btn ui-btn-secondary">导出 MP3</button>
+                    </div>
+                    <div class="ui-player">
+                        <span style="font-size: 18px;">▶</span>
+                        <div class="ui-progress">
+                            <div class="ui-progress-bar"></div>
+                        </div>
+                        <span style="color: #808090; font-size: 13px;">01:23 / 03:45</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 价值与意义 -->
+    <section class="section">
+        <h2 class="section-title">价值与意义</h2>
+        <div class="value-container">
+            <div class="value-item">
+                <div class="value-number" style="background: rgba(100, 200, 255, 0.15); color: #64c8ff;">01</div>
+                <div>
+                    <h3>效率提升：让"听"内容成为高效学习方式</h3>
+                    <p>对于学习者、内容创作者和长文阅读者，声动将"看"转变为"听"，在通勤、运动、做家务等碎片化场景中也能持续获取信息。AI 润色总结功能让长文先精简再朗读，大幅提升信息获取效率。据测算，通过 AI 总结精简后，一篇 5000 字的文章朗读时间可缩短 40% 以上。</p>
+                </div>
+            </div>
+            <div class="value-item">
+                <div class="value-number" style="background: rgba(180, 100, 255, 0.15); color: #b464ff;">02</div>
+                <div>
+                    <h3>社会价值：降低信息获取门槛，助力无障碍阅读</h3>
+                    <p>声动免 Key 开箱即用的特性，让不擅长技术配置的普通用户也能享受高质量 TTS 服务。对视障人群、老年人等阅读困难群体，它提供了便捷的文字朗读工具。同时，AI 总结功能帮助信息过载的用户快速提取核心内容，降低知识获取门槛。</p>
+                </div>
+            </div>
+            <div class="value-item">
+                <div class="value-number" style="background: rgba(100, 255, 180, 0.15); color: #64ffb4;">03</div>
+                <div>
+                    <h3>商业价值：可扩展的 AI 增值服务模式</h3>
+                    <p>基础 TTS 功能完全免费，通过 AI 润色总结功能接入大模型 API 形成增值服务。未来可扩展多角色对话朗读、播客自动生成、有声书制作等高级功能，形成"免费工具 + 增值服务"的可持续商业模式。桌面端形态也便于打包为各平台安装包分发。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>声动 — 免Key高质量AI文字转语音桌面应用</p>
+        <p style="margin-top: 8px;">TRAE AI 创造力大赛 · 学习工作赛道 | 基于 Electron + Vue 3 + Edge TTS 构建</p>
+    </footer>
+</body>
+</html>
