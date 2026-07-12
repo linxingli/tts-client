@@ -4,7 +4,7 @@
       <span class="tts-text-input-label">输入文字</span>
       <div class="tts-text-input-actions">
         <button class="tts-btn" :disabled="summarizing" @click="$emit('summarize')">
-          {{ summarizing ? '总结中...' : '总结' }}
+          {{ summarizing ? 'AI总结中...' : 'AI总结' }}
         </button>
         <button class="tts-btn" @click="$emit('export')">导出 MP3</button>
       </div>
