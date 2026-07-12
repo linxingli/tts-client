@@ -9,6 +9,17 @@ files:
   - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
   - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
   - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+
+# 自动发布到 GitHub Releases
+publish:
+  provider: github
+  releaseType: release
+
+mac:
+  target:
+    - dmg
+  category: public.app-category.utilities
+
 win:
   executableName: tts-client
   # 不请求代码签名，避免在非管理员环境下因创建符号链接失败
