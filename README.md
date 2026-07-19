@@ -59,11 +59,11 @@
 
 直接从 [GitHub Releases](https://github.com/linxingli/tts-client/releases/latest) 下载对应系统的安装包：
 
-| 系统 | 安装包 |
-|------|--------|
+| 系统                  | 安装包                       |
+| --------------------- | ---------------------------- |
 | macOS (Apple Silicon) | `tts-client-x.y.z-arm64.dmg` |
-| macOS (Intel) | `tts-client-x.y.z-x64.dmg` |
-| Windows | `tts-client-x.y.z-setup.exe` |
+| macOS (Intel)         | `tts-client-x.y.z-x64.dmg`   |
+| Windows               | `tts-client-x.y.z-setup.exe` |
 
 > 若 macOS 提示"已损坏"，请查看下方 [FAQ](#macos-打开应用提示已损坏无法打开)。
 
@@ -175,3 +175,11 @@ src/
    ```bash
    xattr -d com.apple.quarantine /Applications/tts-client.app
    ```
+
+## 社区与支持
+
+| 链接                                                            | 说明           |
+| --------------------------------------------------------------- | -------------- |
+| [GitHub 仓库](https://github.com/linxingli/tts-client)          | 源码与问题反馈 |
+| [GitHub Issues](https://github.com/linxingli/tts-client/issues) | Bug 报告       |
+| [LINUX DO 社区](https://linux.do)                               | 友链           |
