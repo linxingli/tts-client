@@ -1,6 +1,6 @@
 {
   "name": "tts-client",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "文字转语音桌面客户端",
   "author": "tts-client",
   "main": "./out/main/index.js",
