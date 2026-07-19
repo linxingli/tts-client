@@ -28,6 +28,12 @@ win:
   target:
     - nsis
 nsis:
+  # 关闭一键安装，显示安装向导，允许用户选择安装位置
+  oneClick: false
+  # 允许用户在安装向导中修改安装目录（不再强制安装到 C 盘）
+  allowToChangeInstallationDirectory: true
+  # 让用户选择“为当前用户”或“为所有用户”安装（为所有用户安装才需要管理员权限）
+  perMachine: false
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
   uninstallDisplayName: ${productName}
